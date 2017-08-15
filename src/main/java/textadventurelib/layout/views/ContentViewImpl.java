@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
@@ -76,7 +75,7 @@ public class ContentViewImpl extends JPanel implements ContentView {
 					break;
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			LogRunner.logger().severe(e);
 		}
 	}
 	
@@ -144,7 +143,7 @@ public class ContentViewImpl extends JPanel implements ContentView {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				LogRunner.logger().log(Level.INFO, String.format("Setting media view width: %s, and height: %s", videoPanel.getWidth(), videoPanel.getHeight()));
+				LogRunner.logger().info(String.format("Setting media view width: %s, and height: %s", videoPanel.getWidth(), videoPanel.getHeight()));
 				mediaView.setFitHeight(videoPanel.getHeight());
 				mediaView.setFitWidth(videoPanel.getWidth());
 				mediaPlayer.play();
@@ -179,13 +178,13 @@ public class ContentViewImpl extends JPanel implements ContentView {
 
 	@Override
 	public void suspend() {
-		LogRunner.logger().log(Level.INFO, "Stopping media");
+		LogRunner.logger().info("Stopping media");
 		mediaPlayer.stop();
 	}
 
 	@Override
 	public void animate() {
-		LogRunner.logger().log(Level.INFO, "Starting media");
+		LogRunner.logger().info("Starting media");
 		if (type == ContentType.Video) {
 			playVideoContent();
 		}

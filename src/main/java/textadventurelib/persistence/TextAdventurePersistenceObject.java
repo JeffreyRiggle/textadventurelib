@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
@@ -443,7 +442,7 @@ public class TextAdventurePersistenceObject extends XmlConfigurationObject{
 			//TODO: Does this really need to be done?
 			
 			if (gameStates.size() > 0) {
-				LogRunner.logger().log(Level.INFO, String.format("Not inlining games. creating a new manager to save to %s", gameStatesLocation()));
+				LogRunner.logger().info(String.format("Not inlining games. creating a new manager to save to %s", gameStatesLocation()));
 				try {
 					XmlConfigurationManager gameStateManager = new XmlConfigurationManager(gameStatesLocation());
 					XmlConfigurationObject gameStatePersistence = new XmlConfigurationObject(GAMESTATES_NAME);
@@ -474,7 +473,7 @@ public class TextAdventurePersistenceObject extends XmlConfigurationObject{
 			//TODO: Does this really need to be done?
 			
 			if (getLayouts().size() > 0) {
-				LogRunner.logger().log(Level.INFO, String.format("Not inlining layouts. creating a new manager to save to %s", layoutsLocation()));
+				LogRunner.logger().info(String.format("Not inlining layouts. creating a new manager to save to %s", layoutsLocation()));
 				try {
 					XmlConfigurationManager layoutManager = new XmlConfigurationManager(layoutsLocation());
 					XmlConfigurationObject layoutPersistence = new XmlConfigurationObject(LAYOUTS_NAME);

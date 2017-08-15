@@ -2,7 +2,6 @@ package textadventurelib.persistence;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
@@ -84,16 +83,16 @@ public class SaveAction implements IAction{
 	
 	private void save(ExecutionParameters params) {
 		synchronized(saveLock) {
-			LogRunner.logger().log(Level.INFO, String.format("Saving data to %s", saveLocation));
+			LogRunner.logger().info(String.format("Saving data to %s", saveLocation));
 			updateManager(params);
 			
 			try {
 				manager.save();
 			} catch (Exception e) {
-				LogRunner.logger().log(Level.WARNING, "Unable to create player object");
+				LogRunner.logger().warning("Unable to create player object");
 			}
 			
-			LogRunner.logger().log(Level.INFO, "Finished saving.");
+			LogRunner.logger().info("Finished saving.");
 		}
 	}
 	
@@ -104,7 +103,7 @@ public class SaveAction implements IAction{
 			try {
 				manager.textAdventure().players().add(new PlayerPersistenceObject(player));
 			} catch (Exception e) {
-				LogRunner.logger().log(Level.WARNING, String.format("Failed to save player: %s", player.name()));
+				LogRunner.logger().warning(String.format("Failed to save player: %s", player.name()));
 			}
 		}
 		

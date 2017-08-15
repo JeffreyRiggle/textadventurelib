@@ -3,6 +3,7 @@ package textadventurelib.layout.fxviews;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import ilusr.logrunner.LogRunner;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,7 +36,7 @@ public class TextInputView extends AnchorPane implements Initializable, LayoutVi
 		try {
 			loader.load();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 

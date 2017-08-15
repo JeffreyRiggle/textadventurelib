@@ -2,7 +2,6 @@ package textadventurelib.actions;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.logrunner.LogRunner;
 import textadventurelib.core.ExecutionParameters;
@@ -68,7 +67,7 @@ public class CompletionAction implements IAction{
 
 	@Override
 	public void execute(ExecutionParameters params) {
-		LogRunner.logger().log(Level.INFO, String.format("Executing Completion Action with text: %s", data));
+		LogRunner.logger().info(String.format("Executing Completion Action with text: %s", data));
 		
 		//Copy the data, to avoid modification exceptions.
 		List<ICompletionListener> listeners = new ArrayList<ICompletionListener>(this.listeners);

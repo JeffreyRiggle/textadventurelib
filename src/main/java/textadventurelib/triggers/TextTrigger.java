@@ -1,7 +1,5 @@
 package textadventurelib.triggers;
 
-import java.util.logging.Level;
-
 import ilusr.logrunner.LogRunner;
 import textadventurelib.core.TriggerParameters;
 
@@ -36,7 +34,7 @@ public class TextTrigger implements ITrigger {
 	@Override
 	public boolean shouldFire(TriggerParameters data) {
 		String input = data.message();
-		LogRunner.logger().log(Level.INFO, String.format("Seeing if %s Matches %s", data.message(), expression));
+		LogRunner.logger().info(String.format("Seeing if %s Matches %s", data.message(), expression));
 		return input.matches(expression);
 	}
 }

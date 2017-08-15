@@ -2,7 +2,6 @@ package textadventurelib.actions;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.gamestatemanager.IFinishListener;
 import ilusr.logrunner.LogRunner;
@@ -42,7 +41,7 @@ public class FinishAction implements IAction {
 	
 	@Override
 	public void execute(ExecutionParameters params) {
-		LogRunner.logger().log(Level.INFO, String.format("Executing Finish Action. Game will end soon."));
+		LogRunner.logger().info(String.format("Executing Finish Action. Game will end soon."));
 		List<IFinishListener> list = new ArrayList<IFinishListener>(listeners);
 		for (IFinishListener listener : list) {
 			listener.onFinished();

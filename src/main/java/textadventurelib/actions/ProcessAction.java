@@ -1,7 +1,6 @@
 package textadventurelib.actions;
 
 import java.io.IOException;
-import java.util.logging.Level;
 
 import ilusr.logrunner.LogRunner;
 import textadventurelib.core.ExecutionParameters;
@@ -88,12 +87,12 @@ public class ProcessAction implements IAction {
 	public void execute(ExecutionParameters params) {
 		Process proc;
 		try {
-			LogRunner.logger().log(Level.INFO, String.format("Attempting to launch: %s.", _process));
+			LogRunner.logger().info(String.format("Attempting to launch: %s.", _process));
 			String[] ex = generateProcessString(_process, _data);
 			proc = _runTime.exec(ex);
-			LogRunner.logger().log(Level.INFO, "Process launched.");
+			LogRunner.logger().info("Process launched.");
 			if (!_block) return;
-			LogRunner.logger().log(Level.INFO, "Process is blocking waiting on process to close.");
+			LogRunner.logger().info("Process is blocking waiting on process to close.");
 			proc.waitFor();
 		} catch (IOException e) {
 			e.printStackTrace();

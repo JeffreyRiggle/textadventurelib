@@ -1,7 +1,6 @@
 package textadventurelib.timers;
 
 import java.util.TimerTask;
-import java.util.logging.Level;
 
 import ilusr.logrunner.LogRunner;
 import textadventurelib.core.ICompletionListener;
@@ -39,7 +38,7 @@ public class CompletionTimerTaskFactory implements ITimerTaskFactory{
 			task.removeListener(listener);
 		}
 		
-		LogRunner.logger().log(Level.INFO, String.format("Creating completion timer task with data: %s", data));
+		LogRunner.logger().info(String.format("Creating completion timer task with data: %s", data));
 
 		task = new CompletionTimerTask(data);
 		

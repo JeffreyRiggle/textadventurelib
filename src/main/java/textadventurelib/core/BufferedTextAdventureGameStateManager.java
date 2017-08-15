@@ -3,7 +3,6 @@ package textadventurelib.core;
 import java.awt.Container;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 import javax.swing.JFrame;
 
@@ -57,7 +56,7 @@ public class BufferedTextAdventureGameStateManager extends BufferedGameStateMana
 	
 	@Override
 	public void start() {
-		LogRunner.logger().log(Level.INFO, "Starting text adventure game");
+		LogRunner.logger().info("Starting text adventure game");
 		super.start();
 		
 		//TODO: is there a better way to do this?
@@ -72,7 +71,7 @@ public class BufferedTextAdventureGameStateManager extends BufferedGameStateMana
 		//TODO: Changes to this are iffy.
 		if (data instanceof GameStateCompletionData) {
 			gameStateData = (GameStateCompletionData)data;
-			LogRunner.logger().log(Level.INFO, String.format("Setting text log to: '%s'", gameStateData.<String>extraData()));
+			LogRunner.logger().info(String.format("Setting text log to: '%s'", gameStateData.<String>extraData()));
 			runtimeData.textLog(gameStateData.<String>extraData());
 		}
 		

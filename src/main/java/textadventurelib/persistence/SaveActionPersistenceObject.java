@@ -1,7 +1,5 @@
 package textadventurelib.persistence;
 
-import java.util.logging.Level;
-
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
 
@@ -116,7 +114,7 @@ public class SaveActionPersistenceObject  extends ActionPersistenceObject {
 		try {
 			action = new SaveAction(saveLocation(), blocking(), gameStatesLocation());
 		} catch (Exception e) {
-			LogRunner.logger().log(Level.INFO, "Failed to create action");
+			LogRunner.logger().info("Failed to create action");
 		}
 		
 		return action;

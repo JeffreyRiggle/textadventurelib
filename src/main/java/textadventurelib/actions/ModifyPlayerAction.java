@@ -1,7 +1,6 @@
 package textadventurelib.actions;
 
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.logrunner.LogRunner;
 import playerlib.attributes.IAttribute;
@@ -76,7 +75,7 @@ public class ModifyPlayerAction implements IAction{
 
 	private void setPlayer(List<IPlayer> players) {
 		for (IPlayer player : players) {
-			LogRunner.logger().log(Level.INFO, String.format("Determining if player: %s is equal to: %s ", player.name(), _playerName));
+			LogRunner.logger().info(String.format("Determining if player: %s is equal to: %s ", player.name(), _playerName));
 			if (player.name().equalsIgnoreCase(_playerName)) {
 				_player = player;
 				break;
@@ -91,10 +90,10 @@ public class ModifyPlayerAction implements IAction{
 		switch(_modificationData.modificationType()) {
 			case Add:
 			case Remove:
-				LogRunner.logger().log(Level.WARNING, String.format("Unable to process modification for %s", _modificationData.modificationType()));
+				LogRunner.logger().warning(String.format("Unable to process modification for %s", _modificationData.modificationType()));
 				break;
 			case Change:
-				LogRunner.logger().log(Level.INFO, String.format("Changing player name to: %s", _modificationData.args().<String>data()));
+				LogRunner.logger().info(String.format("Changing player name to: %s", _modificationData.args().<String>data()));
 				_player.name(_modificationData.args().<String>data());
 				break;
 		}
@@ -111,15 +110,15 @@ public class ModifyPlayerAction implements IAction{
 	private void characteristicModification() {
 		switch(_modificationData.modificationType()) {
 			case Add:
-				LogRunner.logger().log(Level.INFO, String.format("Adding Characteristic: %s", _modificationData.args().<ICharacteristic>data().name()));
+				LogRunner.logger().info(String.format("Adding Characteristic: %s", _modificationData.args().<ICharacteristic>data().name()));
 				_player.addCharacteristic(_modificationData.args().<ICharacteristic>data());
 				break;
 			case Remove:
-				LogRunner.logger().log(Level.INFO, String.format("Removing Characteristic: %s", _modificationData.args().<ICharacteristic>data().name()));
+				LogRunner.logger().info(String.format("Removing Characteristic: %s", _modificationData.args().<ICharacteristic>data().name()));
 				_player.removeCharacteristic(_modificationData.args().<ICharacteristic>data());
 				break;
 			case Change:
-				LogRunner.logger().log(Level.INFO, String.format("Changing Characteristic: %s", _modificationData.args().<Object>identifier()));
+				LogRunner.logger().info(String.format("Changing Characteristic: %s", _modificationData.args().<Object>identifier()));
 				for (ICharacteristic characteristic : _player.characteristics()) {
 					if (characteristic.name().equals(_modificationData.args().identifier())) {
 						characteristicChangeImpl(characteristic, _modificationData.args().data());
@@ -142,12 +141,12 @@ public class ModifyPlayerAction implements IAction{
 	private <T>void characteristicChangeImpl(ICharacteristic characteristic, T data) {
 		switch (_modificationData.args().changeType()) {
 			case Assign:
-				LogRunner.logger().log(Level.FINER, String.format("Setting Characteristic: %s to %s", characteristic.name(), data));
+				LogRunner.logger().finer(String.format("Setting Characteristic: %s to %s", characteristic.name(), data));
 				characteristic.value(data);
 				break;
 			case Add:
 				//TODO: I am not sure if I really like this.
-				LogRunner.logger().log(Level.FINER, String.format("Adding %s to Characteristic: %s ", data, characteristic.name()));
+				LogRunner.logger().finer(String.format("Adding %s to Characteristic: %s ", data, characteristic.name()));
 				if (characteristic.value() == int.class || characteristic.value() instanceof Integer) {
 					characteristic.value(characteristic.<Integer>value() + (Integer)data);
 				}
@@ -156,7 +155,7 @@ public class ModifyPlayerAction implements IAction{
 				}
 				break;
 			case Subtract:
-				LogRunner.logger().log(Level.FINER, String.format("Subtracting %s from Characteristic: %s ", data, characteristic.name()));
+				LogRunner.logger().finer(String.format("Subtracting %s from Characteristic: %s ", data, characteristic.name()));
 
 				//TODO: I am not sure if I really like this.
 				if (characteristic.value() == int.class || characteristic.value() instanceof Integer) {
@@ -177,15 +176,15 @@ public class ModifyPlayerAction implements IAction{
 	private void attributeModification() {
 		switch(_modificationData.modificationType()) {
 			case Add:
-				LogRunner.logger().log(Level.INFO, String.format("Adding Attribute: %s", _modificationData.args().<IAttribute>data().name()));
+				LogRunner.logger().info(String.format("Adding Attribute: %s", _modificationData.args().<IAttribute>data().name()));
 				_player.addAttribute(_modificationData.args().<IAttribute>data());
 				break;
 			case Remove:
-				LogRunner.logger().log(Level.INFO, String.format("Removing Attribute: %s", _modificationData.args().<IAttribute>data().name()));
+				LogRunner.logger().info(String.format("Removing Attribute: %s", _modificationData.args().<IAttribute>data().name()));
 				_player.removeAttribute(_modificationData.args().<IAttribute>data());
 				break;
 			case Change:
-				LogRunner.logger().log(Level.INFO, String.format("Changing Attribute: %s", _modificationData.args().<Object>identifier()));
+				LogRunner.logger().info(String.format("Changing Attribute: %s", _modificationData.args().<Object>identifier()));
 				for (IAttribute attribute : _player.attributes()) {
 					if (attribute.name().equals(_modificationData.args().identifier())) {
 						attributeChangeImpl(attribute, _modificationData.args().data());
@@ -208,12 +207,12 @@ public class ModifyPlayerAction implements IAction{
 	private <T>void attributeChangeImpl(IAttribute attribute, T data) {
 		switch (_modificationData.args().changeType()) {
 			case Assign:
-				LogRunner.logger().log(Level.INFO, String.format("Setting Attribute: %s to %s", attribute.name(), data));
+				LogRunner.logger().info(String.format("Setting Attribute: %s to %s", attribute.name(), data));
 
 				attribute.value(data);
 				break;
 			case Add:
-				LogRunner.logger().log(Level.INFO, String.format("Adding %s to Attribute: %s", data, attribute.name()));
+				LogRunner.logger().info(String.format("Adding %s to Attribute: %s", data, attribute.name()));
 
 				//TODO: I am not sure if I really like this.
 				if (attribute.value() == int.class || attribute.value() instanceof Integer) {
@@ -224,7 +223,7 @@ public class ModifyPlayerAction implements IAction{
 				}
 				break;
 			case Subtract:
-				LogRunner.logger().log(Level.INFO, String.format("Subtracting %s from Attribute: %s", data, attribute.name()));
+				LogRunner.logger().info(String.format("Subtracting %s from Attribute: %s", data, attribute.name()));
 
 				//TODO: I am not sure if I really like this.
 				if (attribute.value() == int.class || attribute.value() instanceof Integer) {
@@ -245,17 +244,17 @@ public class ModifyPlayerAction implements IAction{
 	private void equipmentModification() {
 		switch(_modificationData.modificationType()) {
 			case Add:
-				LogRunner.logger().log(Level.INFO, String.format("Equiping %s to %s", _modificationData.args().<IItem>data(), _modificationData.args().<IBodyPart>identifier()));
+				LogRunner.logger().info(String.format("Equiping %s to %s", _modificationData.args().<IItem>data(), _modificationData.args().<IBodyPart>identifier()));
 				_player.equipment().equip(_modificationData.args().<IBodyPart>identifier(), _modificationData.args().<IItem>data());
 				break;
 			case Remove:
-				LogRunner.logger().log(Level.INFO, String.format("Un-equiping %s from %s", _modificationData.args().<IItem>data(), _modificationData.args().<IBodyPart>identifier()));
+				LogRunner.logger().info(String.format("Un-equiping %s from %s", _modificationData.args().<IItem>data(), _modificationData.args().<IBodyPart>identifier()));
 				_player.equipment().unEquip(_modificationData.args().<IBodyPart>identifier());
 				break;
 			case Change:
 				IItem item = _player.equipment().unEquip(_modificationData.args().<IBodyPart>identifier());
 				item = itemChangeImpl(item, _modificationData.args().data());
-				LogRunner.logger().log(Level.INFO, String.format("Changing equipment for %s to %s", _modificationData.args().<IBodyPart>identifier(), item.name()));
+				LogRunner.logger().info(String.format("Changing equipment for %s to %s", _modificationData.args().<IBodyPart>identifier(), item.name()));
 				_player.equipment().equip(_modificationData.args().<IBodyPart>identifier(), item);
 				break;
 		}		
@@ -295,15 +294,15 @@ public class ModifyPlayerAction implements IAction{
 	private void inventoryModification() {
 		switch(_modificationData.modificationType()) {
 			case Add:
-				LogRunner.logger().log(Level.INFO, String.format("Adding item %s to inventory.", _modificationData.args().<IItem>identifier().name()));
+				LogRunner.logger().info(String.format("Adding item %s to inventory.", _modificationData.args().<IItem>identifier().name()));
 				_player.inventory().addItem(_modificationData.args().<IItem>identifier(), (int)_modificationData.args().data());
 				break;
 			case Remove:
-				LogRunner.logger().log(Level.INFO, String.format("Removing item %s from inventory.", _modificationData.args().<IItem>data().name()));
+				LogRunner.logger().info(String.format("Removing item %s from inventory.", _modificationData.args().<IItem>data().name()));
 				_player.inventory().removeItem(_modificationData.args().<IItem>data());
 				break;
 			case Change:
-				LogRunner.logger().log(Level.INFO, String.format("Changing item %s in inventory.", _modificationData.args().<Object>identifier()));
+				LogRunner.logger().info(String.format("Changing item %s in inventory.", _modificationData.args().<Object>identifier()));
 				for (IItem item : _player.inventory().items()) {
 					if (!item.name().equals(_modificationData.args().identifier())) continue;
 					if (_modificationData.args().data() instanceof Integer || _modificationData.args().data() == int.class) {
@@ -350,15 +349,15 @@ public class ModifyPlayerAction implements IAction{
 	private void bodyPartModification() {
 		switch(_modificationData.modificationType()) {
 			case Add:
-				LogRunner.logger().log(Level.INFO, String.format("Adding Body part %s", _modificationData.args().<IBodyPart>data().name()));
+				LogRunner.logger().info(String.format("Adding Body part %s", _modificationData.args().<IBodyPart>data().name()));
 				_player.addBodyPart(_modificationData.args().<IBodyPart>data());
 				break;
 			case Remove:
-				LogRunner.logger().log(Level.INFO, String.format("Removing Body part %s", _modificationData.args().<IBodyPart>data().name()));
+				LogRunner.logger().info(String.format("Removing Body part %s", _modificationData.args().<IBodyPart>data().name()));
 				_player.removeBodyPart(_modificationData.args().<IBodyPart>data());
 				break;
 			case Change:
-				LogRunner.logger().log(Level.INFO, String.format("Changing Body part %s", _modificationData.args().<Object>identifier()));
+				LogRunner.logger().info(String.format("Changing Body part %s", _modificationData.args().<Object>identifier()));
 				for (IBodyPart bPart : _player.bodyParts()) {
 					if (bPart.name().equals(_modificationData.args().identifier())) {
 						bodyPartChangeImpl(bPart, _modificationData.args().data());

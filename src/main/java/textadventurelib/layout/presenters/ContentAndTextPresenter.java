@@ -1,7 +1,6 @@
 package textadventurelib.layout.presenters;
 
 import java.awt.Container;
-import java.util.logging.Level;
 
 import ilusr.core.mvpbase.PresenterBase;
 import ilusr.logrunner.LogRunner;
@@ -58,13 +57,13 @@ public class ContentAndTextPresenter extends PresenterBase implements TextAdvent
 
 	@Override
 	public void animate() {
-		LogRunner.logger().log(Level.INFO, "Animating content and text view");
+		LogRunner.logger().info("Animating content and text view");
 		view.animate();
 	}
 
 	@Override
 	public void suspend() {
-		LogRunner.logger().log(Level.INFO, "Suspending content and text view");
+		LogRunner.logger().info("Suspending content and text view");
 		model.textModel().reset();
 		view.suspend();
 	}
