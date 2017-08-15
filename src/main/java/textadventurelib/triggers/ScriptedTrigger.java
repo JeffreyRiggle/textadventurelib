@@ -1,7 +1,5 @@
 package textadventurelib.triggers;
 
-import java.util.logging.Level;
-
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -66,14 +64,14 @@ public class ScriptedTrigger implements ITrigger {
 			scriptLoaded = true;
 		} catch (ScriptException e) {
 			scriptLoaded = false;
-			LogRunner.logger().log(Level.INFO, String.format("Error occurred while loading script. %s", e.getMessage()));
+			LogRunner.logger().severe(e);
 		}
 	}
 	
 	@Override
 	public boolean shouldFire(TriggerParameters data) {
 		if (!scriptLoaded) {
-			LogRunner.logger().log(Level.INFO, "No Script has been loaded returning false.");
+			LogRunner.logger().warning("No Script has been loaded returning false.");
 			return false;
 		}
 		
@@ -82,7 +80,7 @@ public class ScriptedTrigger implements ITrigger {
 		try {
 			return (Boolean)invoke.invokeFunction("shouldFire", data);
 		} catch (Exception e) {
-			LogRunner.logger().log(Level.INFO, String.format("Error occurred while running script. %s", e.getMessage()));
+			LogRunner.logger().severe(e);
 		}
 		
 		return false;

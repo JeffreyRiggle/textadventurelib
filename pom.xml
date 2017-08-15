@@ -2,14 +2,14 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.ilusr</groupId>
   <artifactId>TextAdventureLib</artifactId>
-  <version>1.2.0-SNAPSHOT</version>
+  <version>1.3.0-SNAPSHOT</version>
   <name>TextAdventureLib</name>
   <description>Public API for Text Adventure Games</description>
   <dependencies>
   	<dependency>
   		<groupId>com.ilusr.core</groupId>
   		<artifactId>LogRunner</artifactId>
-  		<version>1.2.0-SNAPSHOT</version>
+  		<version>1.3.0-SNAPSHOT</version>
   	</dependency>
   	<dependency>
   		<groupId>com.ilusr.core</groupId>

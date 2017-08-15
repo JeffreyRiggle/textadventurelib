@@ -2,7 +2,6 @@ package textadventurelib.triggers;
 
 import java.lang.reflect.Method;
 import java.util.List;
-import java.util.logging.Level;
 
 import ilusr.logrunner.LogRunner;
 import playerlib.attributes.IAttribute;
@@ -74,7 +73,7 @@ public class PlayerConditionTrigger implements ITrigger{
 				break;
 		}
 		
-		LogRunner.logger().log(Level.INFO, String.format("Trigger condition processing finished with a value of: %s", retVal));
+		LogRunner.logger().info(String.format("Trigger condition processing finished with a value of: %s", retVal));
 		return retVal;
 	}
 
@@ -82,7 +81,7 @@ public class PlayerConditionTrigger implements ITrigger{
 		for (IPlayer player : players) {
 			if (!player.name().equalsIgnoreCase(playerName)) continue;
 			
-			LogRunner.logger().log(Level.INFO, String.format("Setting player to: %s", player.name()));
+			LogRunner.logger().info(String.format("Setting player to: %s", player.name()));
 			this.player = player;
 			break;
 		}
@@ -93,7 +92,7 @@ public class PlayerConditionTrigger implements ITrigger{
 	 * @return a boolean based off of if the condition data is met.
 	 */
 	private boolean attributeCondition() {
-		LogRunner.logger().log(Level.INFO, "Validating attribute condition");
+		LogRunner.logger().info("Validating attribute condition");
 		boolean retVal = false;
 		
 		IAttribute attribute = findAttribute(conditionData.id()[0]);
@@ -103,14 +102,14 @@ public class PlayerConditionTrigger implements ITrigger{
 				if (attribute == null) break;
 				
 				Integer data = reflectForData(attribute, conditionData.dataMember());
-				LogRunner.logger().log(Level.INFO, String.format("Seeing if %s is greater than %s", data, conditionData.<Integer>comparisonData()));
+				LogRunner.logger().info(String.format("Seeing if %s is greater than %s", data, conditionData.<Integer>comparisonData()));
 				retVal =  data > conditionData.<Integer>comparisonData();
 				break;
 			case LessThan:
 				if (attribute == null) break;
 				
 				Integer data1 = reflectForData(attribute, conditionData.dataMember());
-				LogRunner.logger().log(Level.INFO, String.format("Seeing if %s is less than %s", data1, conditionData.<Integer>comparisonData()));
+				LogRunner.logger().info(String.format("Seeing if %s is less than %s", data1, conditionData.<Integer>comparisonData()));
 				retVal = data1 < conditionData.<Integer>comparisonData();
 				break;
 			case EqualTo:
@@ -154,7 +153,7 @@ public class PlayerConditionTrigger implements ITrigger{
 	 * @return a boolean based off of if the condition data is met.
 	 */
 	private boolean characteristicCondition() {
-		LogRunner.logger().log(Level.INFO, "Validating characteristic condition");
+		LogRunner.logger().info("Validating characteristic condition");
 		boolean retVal = false;
 		
 		ICharacteristic characteristic = findCharacteristic(conditionData.id()[0]);
@@ -164,14 +163,14 @@ public class PlayerConditionTrigger implements ITrigger{
 				if (characteristic == null) break;
 				
 				Integer data = reflectForData(characteristic, conditionData.dataMember());
-				LogRunner.logger().log(Level.INFO, String.format("Seeing if %s is greater than %s", data, conditionData.<Integer>comparisonData()));
+				LogRunner.logger().info(String.format("Seeing if %s is greater than %s", data, conditionData.<Integer>comparisonData()));
 				retVal =  data > conditionData.<Integer>comparisonData();
 				break;
 			case LessThan:
 				if (characteristic == null) break;
 				
 				Integer data1 = reflectForData(characteristic, conditionData.dataMember());
-				LogRunner.logger().log(Level.INFO, String.format("Seeing if %s is less than %s", data1, conditionData.<Integer>comparisonData()));
+				LogRunner.logger().info(String.format("Seeing if %s is less than %s", data1, conditionData.<Integer>comparisonData()));
 				retVal = data1 < conditionData.<Integer>comparisonData();
 				break;
 			case EqualTo:
@@ -215,7 +214,7 @@ public class PlayerConditionTrigger implements ITrigger{
 	 * @return a boolean based off of if the condition data is met.
 	 */
 	private boolean bodyPartCondition() {
-		LogRunner.logger().log(Level.INFO, "Validating body part condition");
+		LogRunner.logger().info("Validating body part condition");
 		boolean retVal = false;
 		
 		IBodyPart bodyPart = findBodyPart(conditionData.id()[0]);
@@ -230,14 +229,14 @@ public class PlayerConditionTrigger implements ITrigger{
 				if (bodyPart == null || characteristic == null) break;
 				
 				Integer data = reflectForData(characteristic, conditionData.dataMember());
-				LogRunner.logger().log(Level.INFO, String.format("Seeing if %s is greater than %s", data, conditionData.<Integer>comparisonData()));
+				LogRunner.logger().info(String.format("Seeing if %s is greater than %s", data, conditionData.<Integer>comparisonData()));
 				retVal =  data > conditionData.<Integer>comparisonData();
 				break;
 			case LessThan:
 				if (bodyPart == null || characteristic == null) break;
 				
 				Integer data1 = reflectForData(characteristic, conditionData.dataMember());
-				LogRunner.logger().log(Level.INFO, String.format("Seeing if %s is less than %s", data1, conditionData.<Integer>comparisonData()));
+				LogRunner.logger().info(String.format("Seeing if %s is less than %s", data1, conditionData.<Integer>comparisonData()));
 				retVal = data1 < conditionData.<Integer>comparisonData();
 				break;
 			case EqualTo:
@@ -290,7 +289,7 @@ public class PlayerConditionTrigger implements ITrigger{
 	 * @return a boolean based off of if the condition data is met.
 	 */
 	private boolean inventoryCondition() {
-		LogRunner.logger().log(Level.INFO, "Validating inventory condition");
+		LogRunner.logger().info("Validating inventory condition");
 		boolean retVal = false;
 		
 		IItem item = findInventoryItem(conditionData.id()[0]);
@@ -310,7 +309,7 @@ public class PlayerConditionTrigger implements ITrigger{
 				if (property == null) break;
 				
 				Integer pNum = reflectForData(property, conditionData.dataMember());
-				LogRunner.logger().log(Level.INFO, String.format("Seeing if %s is greater than %s", pNum, conditionData.<Integer>comparisonData()));
+				LogRunner.logger().info(String.format("Seeing if %s is greater than %s", pNum, conditionData.<Integer>comparisonData()));
 				retVal = pNum > conditionData.<Integer>comparisonData();
 				break;
 			case LessThan:
@@ -326,7 +325,7 @@ public class PlayerConditionTrigger implements ITrigger{
 				if (property == null) break;
 				
 				Integer num = reflectForData(property, conditionData.dataMember());
-				LogRunner.logger().log(Level.INFO, String.format("Seeing if %s is less than %s", num, conditionData.<Integer>comparisonData()));
+				LogRunner.logger().info(String.format("Seeing if %s is less than %s", num, conditionData.<Integer>comparisonData()));
 				retVal = num < conditionData.<Integer>comparisonData();
 				break;
 			case EqualTo:
@@ -405,7 +404,7 @@ public class PlayerConditionTrigger implements ITrigger{
 	 * @return a boolean based off of if the condition data is met.
 	 */
 	private boolean equipmentCondition() {
-		LogRunner.logger().log(Level.INFO, "Validating equipment condition");
+		LogRunner.logger().info("Validating equipment condition");
 		boolean retVal = false;
 		
 		IItem item = findEquipmentItem(conditionData.id()[0]);
@@ -421,7 +420,7 @@ public class PlayerConditionTrigger implements ITrigger{
 				if (property == null) break;
 				
 				Integer pNum = reflectForData(property, conditionData.dataMember());
-				LogRunner.logger().log(Level.INFO, String.format("Seeing if %s is greater than %s", pNum, conditionData.<Integer>comparisonData()));
+				LogRunner.logger().info(String.format("Seeing if %s is greater than %s", pNum, conditionData.<Integer>comparisonData()));
 				retVal = pNum > conditionData.<Integer>comparisonData();
 				break;
 			case LessThan:
@@ -433,7 +432,7 @@ public class PlayerConditionTrigger implements ITrigger{
 				if (property == null) break;
 				
 				Integer num = reflectForData(property, conditionData.dataMember());
-				LogRunner.logger().log(Level.INFO, String.format("Seeing if %s is less than %s", num, conditionData.<Integer>comparisonData()));
+				LogRunner.logger().info(String.format("Seeing if %s is less than %s", num, conditionData.<Integer>comparisonData()));
 				retVal = num < conditionData.<Integer>comparisonData();
 				break;
 			case EqualTo:
@@ -493,7 +492,7 @@ public class PlayerConditionTrigger implements ITrigger{
 	 * @return a boolean based off of if the condition data is met.
 	 */
 	private boolean playerCondition() {
-		LogRunner.logger().log(Level.INFO, "Validating player condition");
+		LogRunner.logger().info("Validating player condition");
 		boolean retVal = false;
 		
 		switch (conditionData.condition()) {

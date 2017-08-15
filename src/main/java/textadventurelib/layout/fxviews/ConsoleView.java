@@ -3,6 +3,7 @@ package textadventurelib.layout.fxviews;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import ilusr.logrunner.LogRunner;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
@@ -38,7 +39,7 @@ public class ConsoleView extends AnchorPane implements Initializable, LayoutView
 		try {
 			loader.load();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogRunner.logger().severe(e);
 		}
 	}
 

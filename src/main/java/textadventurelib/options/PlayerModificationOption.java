@@ -1,7 +1,6 @@
 package textadventurelib.options;
 
 import java.util.List;
-import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -51,14 +50,14 @@ public class PlayerModificationOption extends Option{
 		System.out.println("Seeing if " + data.message() + " Should trigger");
 		boolean execute = super.shouldTrigger(data);
 		
-		LogRunner.logger().log(Level.INFO, "Should execute " + execute);
+		LogRunner.logger().info("Should execute " + execute);
 		
 		if (execute && modPlayerAction.data().modificationType() == ModificationType.Change) {
 			String dataString = data.message();
-			LogRunner.logger().log(Level.INFO, "Running matcher against " + pattern.pattern());
+			LogRunner.logger().info("Running matcher against " + pattern.pattern());
 			Matcher matcher = pattern.matcher(dataString);
 			if (matcher.find()) {
-				LogRunner.logger().log(Level.INFO, "Setting data to " + matcher.group(1));
+				LogRunner.logger().info("Setting data to " + matcher.group(1));
 				modPlayerAction.data().args().data(matcher.group(1));
 			}
 		}

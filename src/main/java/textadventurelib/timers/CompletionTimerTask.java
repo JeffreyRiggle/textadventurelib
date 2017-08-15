@@ -1,7 +1,6 @@
 package textadventurelib.timers;
 
 import java.util.TimerTask;
-import java.util.logging.Level;
 
 import ilusr.logrunner.LogRunner;
 import textadventurelib.actions.CompletionAction;
@@ -49,7 +48,7 @@ public class CompletionTimerTask extends TimerTask{
 	
 	@Override
 	public void run() {
-		LogRunner.logger().log(Level.INFO, "Executing completion");
+		LogRunner.logger().info("Executing completion");
 		completion.execute(null);
 	}
 }

@@ -1,7 +1,5 @@
 package textadventurelib.actions;
 
-import java.util.logging.Level;
-
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -71,14 +69,14 @@ public class ScriptedAction implements IAction {
 			scriptLoaded = true;
 		} catch (ScriptException e) {
 			scriptLoaded = false;
-			LogRunner.logger().log(Level.INFO, String.format("Error occurred while loading script. %s", e.getMessage()));
+			LogRunner.logger().severe(e);
 		}
 	}
 	
 	@Override
 	public void execute(ExecutionParameters params) {
 		if (!scriptLoaded) {
-			LogRunner.logger().log(Level.INFO, "No Script has been loaded returning.");
+			LogRunner.logger().warning("No Script has been loaded returning.");
 			return;
 		}
 		
@@ -87,7 +85,7 @@ public class ScriptedAction implements IAction {
 		try {
 			invoke.invokeFunction("execute", params);
 		} catch (Exception e) {
-			LogRunner.logger().log(Level.INFO, String.format("Error occurred while running script. %s", e.getMessage()));
+			LogRunner.logger().severe(e);
 		}
 	}
 

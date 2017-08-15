@@ -2,7 +2,6 @@ package textadventurelib.layout.views;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.util.logging.Level;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -113,7 +112,7 @@ public class TextAndInputViewImpl extends JPanel implements IView, IInputListene
 				textLog.setCaretPosition(textLog.getDocument().getLength());
 				
 				if (input instanceof TextBoxInputView) {
-					LogRunner.logger().log(Level.INFO, "Setting focus to text input view");
+					LogRunner.logger().info("Setting focus to text input view");
 					((Container)input).requestFocusInWindow();
 				}
 			}

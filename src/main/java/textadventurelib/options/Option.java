@@ -3,7 +3,6 @@ package textadventurelib.options;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.logging.Level;
 
 import ilusr.logrunner.LogRunner;
 import textadventurelib.actions.IAction;
@@ -51,7 +50,7 @@ public class Option implements IOption{
 
 	@Override
 	public boolean shouldTrigger(TriggerParameters data) {
-		LogRunner.logger().log(Level.FINEST, String.format("Seeing if option should trigger with message: %s", data.message()));
+		LogRunner.logger().finest(String.format("Seeing if option should trigger with message: %s", data.message()));
 		boolean execute = false;
 		
 		for (ITrigger trigger: triggers) {

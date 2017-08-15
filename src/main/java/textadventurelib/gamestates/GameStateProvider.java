@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.logging.Level;
 
 import ilusr.gamestatemanager.IDataSource;
 import ilusr.gamestatemanager.IGameState;
@@ -34,7 +33,7 @@ public class GameStateProvider implements IDataSource{
 	@Override
 	public Map<Object, IGameState> provideGameStates(int bufferSize,
 			Object state) {
-		LogRunner.logger().log(Level.INFO, String.format("Getting Game States with a buffer size of %s", bufferSize));
+		LogRunner.logger().info(String.format("Getting Game States with a buffer size of %s", bufferSize));
 		Map<Object, GameStatePersistenceObject> persistList = new LinkedHashMap<Object, GameStatePersistenceObject>();
 		TextAdventureGameState nextState = null;
 		GameStatePersistenceObject persistedState = null;
@@ -44,14 +43,14 @@ public class GameStateProvider implements IDataSource{
 			if (gs.stateId().equals(state)) {
 				persistedState = gs;
 				nextState = (TextAdventureGameState)gs.convertToGameState();
-				LogRunner.logger().log(Level.INFO, String.format("Found next game state: %s", gs.stateId()));
+				LogRunner.logger().info(String.format("Found next game state: %s", gs.stateId()));
 				break;
 			}
 		}
 		
 		if (nextState == null || persistedState == null) {
 			//Error condition.
-			LogRunner.logger().log(Level.WARNING, "Unable to find any game states");
+			LogRunner.logger().warning("Unable to find any game states");
 			return new HashMap<Object, IGameState>();
 		}
 		
@@ -87,7 +86,7 @@ public class GameStateProvider implements IDataSource{
 		allStates = mergedStates;
 		
 		if (offset == 0) {
-			LogRunner.logger().log(Level.INFO, String.format("No Diff found in lists, resetting bufferSize to %s", targetBufferSize));
+			LogRunner.logger().info(String.format("No Diff found in lists, resetting bufferSize to %s", targetBufferSize));
 			return allStates;
 		}
 		
@@ -103,11 +102,11 @@ public class GameStateProvider implements IDataSource{
 		retVal.put(gameState.stateId(), gameState);
 		
 		if (retVal.size() == bufferSize) {
-			LogRunner.logger().log(Level.INFO, String.format("Not finding child game states for game state: %s since buffer is full", gameState.stateId()));
+			LogRunner.logger().info(String.format("Not finding child game states for game state: %s since buffer is full", gameState.stateId()));
 			return retVal;
 		}
 		
-		LogRunner.logger().log(Level.INFO, String.format("Finding child game states for game state: %s", gameState.stateId()));
+		LogRunner.logger().info(String.format("Finding child game states for game state: %s", gameState.stateId()));
 		
 		for (OptionPersistenceObject opt : gameState.options()) {
 			if (!(opt.action() instanceof CompletionActionPersistence)) continue;
@@ -117,7 +116,7 @@ public class GameStateProvider implements IDataSource{
 			
 			if (gs == null) continue;
 			
-			LogRunner.logger().log(Level.INFO, String.format("Found Child: %s", id));
+			LogRunner.logger().info(String.format("Found Child: %s", id));
 			retVal.put(id, gs);
 			
 			if (retVal.size() == bufferSize) {
