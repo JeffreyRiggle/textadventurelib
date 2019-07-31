@@ -27,7 +27,7 @@ public class PlayerConditionTrigger implements ITrigger{
 	
 	/**
 	 * 
-	 * @param player The @see IPlayer to base condition data off of.
+	 * @param playerName The @see IPlayer to base condition data off of.
 	 * @param data The @see PlayerConditionParameters to use.
 	 */
 	public PlayerConditionTrigger(String playerName, PlayerConditionParameters data) {

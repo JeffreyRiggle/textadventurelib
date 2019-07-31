@@ -25,7 +25,7 @@ public class ModifyPlayerAction implements IAction{
 	
 	/**
 	 * 
-	 * @param player The @see IPlayer to modify.
+	 * @param playerName The @see IPlayer to modify.
 	 */
 	public ModifyPlayerAction(String playerName) {
 		_playerName = playerName;

@@ -149,7 +149,7 @@ public class PlayerTriggerPersistenceObject extends TriggerPersistenceObject{
 	
 	/**
 	 * 
-	 * @param data The new data to compare against (example player.age > 13).
+	 * @param data The new data to compare against (example player.age greater than 13).
 	 */
 	public <T> void comparisonData(T data) {
 		super.removeParameter(comparisonData);

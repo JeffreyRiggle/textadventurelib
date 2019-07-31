@@ -16,7 +16,7 @@ public class TimerHelper {
 	
 	/**
 	 * 
-	 * @param task The task to run.
+	 * @param taskFactory The task factory to use.
 	 * @param duration The time to wait to run this process.
 	 */
 	public TimerHelper(ITimerTaskFactory taskFactory, long duration) {
