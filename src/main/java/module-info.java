@@ -20,6 +20,7 @@ module ilusr.textadventurelib {
     exports textadventurelib.macro;
     exports textadventurelib.options;
     exports textadventurelib.persistence;
+    exports textadventurelib.persistence.player;
     exports textadventurelib.timers;
     exports textadventurelib.triggers;
 }
