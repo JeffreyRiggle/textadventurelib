@@ -56,6 +56,11 @@
 		<artifactId>javafx-web</artifactId>
 		<version>17.0.17</version>
 	</dependency>
+	<dependency>
+    	<groupId>org.openjdk.nashorn</groupId>
+    	<artifactId>nashorn-core</artifactId>
+    	<version>15.7</version>
+	</dependency>
   	<dependency>
   		<groupId>junit</groupId>
   		<artifactId>junit</artifactId>
